@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#6366f1" />
+  <meta name="description" content="بازی حافظه خفن - Progressive Web App" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <title>بازی حافظه</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- صفحه شروع -->
+    <div id="start-screen" class="screen active">
+      <div class="logo">🧠</div>
+      <h1>بازی حافظه</h1>
+      <p class="subtitle">حافظه‌ات رو به چالش بکش!</p>
 
+      <div class="difficulty-buttons">
+        <button class="diff-btn" data-level="easy">آسان<br><small>۴×۳</small></button>
+        <button class="diff-btn" data-level="medium">متوسط<br><small>۴×۴</small></button>
+        <button class="diff-btn" data-level="hard">سخت<br><small>۶×۴</small></button>
+      </div>
+
+      <div class="best-score" id="best-score-display">بهترین رکورد: —</div>
+    </div>
+
+    <!-- صفحه بازی -->
+    <div id="game-screen" class="screen">
+      <header class="game-header">
+        <button id="back-btn" class="icon-btn">←</button>
+        <div class="stats">
+          <div class="stat">
+            <span class="label">حرکت</span>
+            <span id="moves">0</span>
+          </div>
+          <div class="stat">
+            <span class="label">زمان</span>
+            <span id="timer">00:00</span>
+          </div>
+        </div>
+        <button id="restart-btn" class="icon-btn">↻</button>
+      </header>
+
+      <div id="board" class="board"></div>
+    </div>
+
+    <!-- مودال برد -->
+    <div id="win-modal" class="modal">
+      <div class="modal-content">
+        <div class="win-emoji">🎉</div>
+        <h2>آفرین!</h2>
+        <p id="win-message"></p>
+        <button id="play-again-btn" class="primary-btn">دوباره بازی کن</button>
+        <button id="home-btn" class="secondary-btn">صفحه اصلی</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
