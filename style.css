@@ -1,0 +1,289 @@
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text: #f1f5f9;
+  --success: #22c55e;
+  --radius: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Vazirmatn', 'Tahoma', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  position: relative;
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  min-height: 100dvh;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* ===== صفحه شروع ===== */
+.logo {
+  font-size: 72px;
+  margin-top: 40px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+h1 {
+  font-size: 2.4rem;
+  margin: 12px 0 4px;
+  background: linear-gradient(135deg, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-bottom: 40px;
+}
+
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.diff-btn {
+  background: var(--card-bg);
+  border: 2px solid #334155;
+  color: white;
+  padding: 18px;
+  border-radius: var(--radius);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.diff-btn:hover, .diff-btn:active {
+  border-color: var(--primary);
+  background: #312e81;
+  transform: scale(1.03);
+}
+
+.diff-btn small {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.best-score {
+  margin-top: 36px;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+/* ===== صفحه بازی ===== */
+.game-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 4px;
+}
+
+.icon-btn {
+  background: var(--card-bg);
+  border: none;
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats {
+  display: flex;
+  gap: 24px;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat .label {
+  display: block;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.stat span:last-child {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* صفحه بازی - کارت‌ها */
+.board {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  perspective: 1000px;
+}
+
+.board.easy { grid-template-columns: repeat(4, 1fr); }
+.board.medium { grid-template-columns: repeat(4, 1fr); }
+.board.hard { grid-template-columns: repeat(6, 1fr); }
+
+.card {
+  aspect-ratio: 1;
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card.flipped,
+.card.matched {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.6rem, 8vw, 2.4rem);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.card-front {
+  background: linear-gradient(145deg, #4f46e5, #7c3aed);
+  transform: rotateY(180deg);
+}
+
+.card-back {
+  background: var(--card-bg);
+  border: 2px solid #334155;
+}
+
+.card.matched .card-front {
+  background: linear-gradient(145deg, #16a34a, #22c55e);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+}
+
+/* ===== مودال برد ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 36px 28px;
+  text-align: center;
+  max-width: 320px;
+  width: 100%;
+  border: 1px solid #334155;
+  animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.win-emoji {
+  font-size: 64px;
+  margin-bottom: 12px;
+}
+
+.modal-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.modal-content p {
+  color: #94a3b8;
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+.primary-btn, .secondary-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.primary-btn {
+  background: var(--primary);
+  color: white;
+}
+
+.primary-btn:active {
+  background: var(--primary-dark);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid #334155;
+}
+
+/* ریسپانسیو */
+@media (max-width: 400px) {
+  .board.hard {
+    gap: 6px;
+  }
+  .card-face {
+    border-radius: 8px;
+  }
+  }
